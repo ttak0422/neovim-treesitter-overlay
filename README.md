@@ -11,6 +11,11 @@
 > [!WARNING]
 > This is experimental project. With the increase in the number of managed entities, it is expected that the content provided will be delayed from nightly releases.
 
+
+## Status
+[![Nix flake check](https://github.com/ttak0422/neovim-treesitter-overlay/actions/workflows/check.yml/badge.svg)](https://github.com/ttak0422/neovim-treesitter-overlay/actions/workflows/check.yml)
+
+
 ## Lifecycle
 
 ```
@@ -41,36 +46,3 @@
   └─────────┤ Apply packages update │
             └───────────────────────┘
 ```
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
