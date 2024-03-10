@@ -21,7 +21,7 @@ jobs:
     - uses: DeterminateSystems/update-flake-lock@v21
       with:
         token: ${{ steps.app-token.outputs.token }}
-        inputs: "vim-plugins-overlay-latest neovim-nightly-overlay-latest"
+        inputs: "neovim-nightly-overlay nixpkgs"
     - name: Setup merge
       env:
         GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
