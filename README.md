@@ -15,8 +15,16 @@
 ## Status
 [![Nix flake check](https://github.com/ttak0422/neovim-treesitter-overlay/actions/workflows/check.yml/badge.svg)](https://github.com/ttak0422/neovim-treesitter-overlay/actions/workflows/check.yml)
 
+## Package
+- neovim
+- nvim-treesitter
 
-## Lifecycle
+## Overlay
+- neovim-unwrapped
+- neovim-nightly
+- vimPlugins.nvim-treesitter
+
+## Release cycle
 
 ```
   ┌────────────────────┬────────────────────────┐
