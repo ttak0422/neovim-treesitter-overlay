@@ -10,12 +10,10 @@
     };
   };
 
-  outputs = inputs@{ flake-parts, ... }:
+  outputs = inputs@{ self, flake-parts, ... }:
     flake-parts.lib.mkFlake { inherit inputs; } ({ config, withSystem, ... }: {
       systems =
         [ "x86_64-linux" "x86_64-darwin" "aarch64-linux" "aarch64-darwin" ];
-
-      imports = [ flake-parts.flakeModules.easyOverlay ];
 
       perSystem = { inputs', self', system, config, lib, pkgs, ... }: {
         _module.args.pkgs = import inputs.nixpkgs { inherit system; };
@@ -24,13 +22,6 @@
           neovim = inputs'.neovim-nightly-overlay.packages.neovim;
           nvim-treesitter = pkgs.vimPlugins.nvim-treesitter;
         };
-
-        overlayAttrs = lib.genAttrs [ "neovim-unwrapped" "neovim-nightly" ]
-          (_: config.packages.neovim) // {
-            vimPlugins = pkgs.vimPlugins // {
-              nvim-treesitter = config.packages.nvim-treesitter;
-            };
-          };
 
         checks = {
           check-health-nvim-treesitter = let
@@ -62,6 +53,14 @@
         };
       };
 
-      flake = { overlay = inputs.self.overlays.default; };
+      flake.overlay = final: prev:
+        let inherit (prev.stdenv) system;
+        in {
+          neovim-unwrapped = self.packages.${system}.neovim;
+          neovim-nightly = self.packages.${system}.neovim;
+          vimPlugins = prev.vimPlugins // {
+            nvim-treesitter = self.packages.${system}.nvim-treesitter;
+          };
+        };
     });
 }
